@@ -1,0 +1,42 @@
+<nav class="bg-green-200 border-b text-black font-uncut-sans">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16">
+      <div class="flex-shrink-0 flex items-center">
+        <a href="/public" class="text-2xl font-bold">Digital banking</a>
+      </div>
+
+      <div class="hidden md:flex md:items-center md:space-x-4">
+        <a routerLink="/" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700">
+          Home
+        </a>
+        <a routerLink="/customers" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700">
+          customers
+        </a>
+        <a routerLink="/accounts" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700">
+          Accounts
+        </a>
+      </div>
+
+      <div class="md:hidden flex items-center">
+        <button (click)="toggleMenu()"
+                class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none">
+          <svg *ngIf="!isMenuOpen" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+          <svg *ngIf="isMenuOpen" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="isMenuOpen" class="md:hidden">
+    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+      <a href="#" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700">Home</a>
+      <a href="#" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700">About</a>
+      <a href="#" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700">Services</a>
+      <a href="#" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700">Contact</a>
+    </div>
+  </div>
+</nav>

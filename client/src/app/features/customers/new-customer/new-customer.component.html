@@ -1,0 +1,53 @@
+<div class="min-w-80 max-w-md mx-auto" hlmCard>
+  <div hlmCardHeader>
+    <h3 hlmCardTitle class="flex items-center">
+      <ng-icon hlm name="lucidePlus" size="sm" class="mr-2" />
+      New Customer
+    </h3>
+    <p hlmCardDescription>
+      Create a new customer by filling out the form below. You can add
+      additional information later.
+    </p>
+  </div>
+  <div hlmCardContent class="p-6">
+    <form [formGroup]="form" class="space-y-4" (ngSubmit)="onSubmit()">
+      <hlm-form-field>
+        <input
+          aria-label="Name"
+          formControlName="name"
+          class="w-full"
+          hlmInput
+          type="text"
+          placeholder="Name"
+        />
+        <hlm-error *ngIf="form.get('name')?.hasError('required') && form.get('name')?.touched">
+          Name is required
+        </hlm-error>
+      </hlm-form-field>
+      <hlm-form-field>
+        <input
+          aria-label="Email"
+          formControlName="email"
+          class="w-full"
+          hlmInput
+          type="email"
+          placeholder="Email"
+        />
+        <hlm-error *ngIf="form.get('email')?.hasError('required') && form.get('email')?.touched">
+          Email is required
+        </hlm-error>
+        <hlm-error *ngIf="form.get('email')?.hasError('email') && form.get('email')?.touched">
+          Email is not valid
+        </hlm-error>
+      </hlm-form-field>
+      <button
+        type="submit"
+        hlmBtn
+        [disabled]="form.invalid"
+        aria-label="Create new customer"
+      >
+        Create
+      </button>
+    </form>
+  </div>
+</div>
