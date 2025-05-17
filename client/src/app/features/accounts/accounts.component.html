@@ -1,0 +1,51 @@
+<div class="min-w-80 max-w-md mx-auto" hlmCard>
+  <div hlmCardHeader>
+    <div class="flex justify-between items-center">
+    <h3 hlmCardTitle>Account Details</h3>
+      <button hlmBtn [routerLink]="['/customers', account()?.customerDTO?.id]">
+        Back
+      </button>
+    </div>
+    <p hlmCardDescription>View the details of the bank account.</p>
+  </div>
+  <div hlmCardContent class="p-6">
+    @if (account()) {
+    <div class="space-y-4">
+      <div class="flex justify-start gap-2 items-center">
+        <label hlmLabel class="font-semibold">Balance : </label>
+        <p>{{ account()!.balance | currency:account()!.currency }}</p>
+      </div>
+      <div class="flex justify-start gap-2 items-center">
+        <label hlmLabel class="font-semibold">Customer : </label>
+        <p>{{ account()!.customerDTO.name || 'None' }}</p>
+      </div>
+      <div class="flex justify-start gap-2 items-center">
+        <label hlmLabel class="font-semibold">Created At : </label>
+        <p>{{ account()!.createdAt | date:'short' }}</p>
+      </div>
+    </div>
+
+    } @else {
+    <p class="text-muted-foreground">No account found.</p>
+    }
+  </div>
+  <div hlmCardFooter class="flex flex-wrap gap-2 justify-between">
+      <button hlmBtn
+        [routerLink]="['/customers', account()?.customerDTO?.id, 'accounts', account()?.id, 'history']">
+        View History
+      </button>
+      <button hlmBtn class="bg-green-200 text-black"
+        [routerLink]="['/customers', account()?.customerDTO?.id, 'accounts', account()?.id, 'operations']">
+        Operations
+      </button>
+      <button hlmBtn variant="outline" class="w-full"
+        [routerLink]="['/customers', account()?.customerDTO?.id, 'new-account']">
+        New Account
+      </button>
+      <button hlmBtn variant="destructive"  (click)="deleteAccount()"
+              class="w-full"
+      >
+        Delete
+      </button>
+    </div>
+</div>

@@ -19,7 +19,15 @@ import {HlmTableImports} from '@spartan-ng/ui-table-helm';
 import {BrnSelectImports} from '@spartan-ng/brain/select';
 import {HlmInputDirective} from '@spartan-ng/ui-input-helm';
 import {HlmSelectImports} from '@spartan-ng/ui-select-helm';
-import {lucideArrowUpDown, lucideChevronDown, lucideEllipsis, lucideTrash, lucidePencil , lucidePlus} from '@ng-icons/lucide';
+import {
+  lucideArrowUpDown,
+  lucideChevronDown,
+  lucideEllipsis,
+  lucideTrash,
+  lucidePencil,
+  lucidePlus,
+  lucideEye
+} from '@ng-icons/lucide';
 import {provideIcons} from '@ng-icons/core';
 import {NgIcon} from '@ng-icons/core';
 import {RouterLink} from '@angular/router';
@@ -46,7 +54,7 @@ import {toast} from 'ngx-sonner';
   ],
   templateUrl: './customers.component.html',
   providers: [
-    provideIcons({lucideArrowUpDown, lucideChevronDown, lucideEllipsis, lucideTrash, lucidePencil , lucidePlus})
+    provideIcons({lucideArrowUpDown, lucideChevronDown, lucideEllipsis, lucideTrash, lucidePencil , lucidePlus , lucideEye})
   ],
   styleUrl: './customers.component.css'
 })
@@ -152,7 +160,7 @@ export class CustomersComponent implements OnInit {
   private getAllCustomers() {
     this.customerService.getAll().subscribe({
       next: (customers) => {
-        console.log('customers', customers);
+        console.log('Customers', customers);
         this._customers.set(customers);
       },
       error: (error) => {

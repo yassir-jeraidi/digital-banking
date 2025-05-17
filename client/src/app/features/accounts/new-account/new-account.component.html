@@ -1,0 +1,55 @@
+<div class="container mx-auto p-4">
+    <div hlmCard class="w-full max-w-md mx-auto">
+        <div hlmCardHeader>
+            <h2 hlmCardTitle>Create New Account</h2>
+            <p hlmCardDescription>Create a new bank account for the customer</p>
+        </div>
+
+        <div hlmCardContent>
+            <!-- Account Type Selector -->
+            <div class="flex space-x-2 mb-4">
+                <button type="button" hlmBtn [variant]="accountType === 'CURRENT' ? 'default' : 'outline'"
+                    (click)="setAccountType('CURRENT')">Current Account</button>
+                <button type="button" hlmBtn [variant]="accountType === 'SAVING' ? 'default' : 'outline'"
+                    (click)="setAccountType('SAVING')">Saving Account</button>
+            </div>
+
+            <!-- Account Form -->
+            <form [formGroup]="accountForm" (ngSubmit)="submitForm()" class="space-y-4">
+                <div class="grid w-full items-center gap-1.5">
+                    <label for="initialBalance" hlmLabel>Initial Balance</label>
+                    <input type="number" id="initialBalance" formControlName="initialBalance" hlmInput
+                        placeholder="Enter initial balance" min="0" step="0.01">
+                    <div *ngIf="accountForm.get('initialBalance')?.invalid && accountForm.get('initialBalance')?.touched"
+                        class="text-red-500 text-sm">
+                        Initial balance is required and must be greater than or equal to 0
+                    </div>
+                </div>
+
+                <div class="grid w-full items-center gap-1.5">
+                    <label for="specificValue" hlmLabel>
+                        {{ accountType === 'CURRENT' ? 'Overdraft' : 'Interest Rate' }}
+                    </label>
+                    <input type="number" id="specificValue" formControlName="specificValue" hlmInput
+                        [placeholder]="accountType === 'CURRENT' ? 'Enter overdraft limit' : 'Enter interest rate'"
+                        min="0" step="0.01">
+                    <div *ngIf="accountForm.get('specificValue')?.invalid && accountForm.get('specificValue')?.touched"
+                        class="text-red-500 text-sm">
+                        {{ accountType === 'CURRENT' ? 'Overdraft' : 'Interest rate' }} is required and must be greater
+                        than or equal to 0
+                    </div>
+                </div>
+
+                <button type="submit" hlmBtn variant="default" class="w-full" [disabled]="accountForm.invalid">
+                    Create {{ accountType === 'CURRENT' ? 'Current' : 'Saving' }} Account
+                </button>
+            </form>
+        </div>
+
+        <div hlmCardFooter>
+            <button type="button" hlmBtn variant="outline" [routerLink]="['/customers', customerId]">
+                Back to Customer
+            </button>
+        </div>
+    </div>
+</div>

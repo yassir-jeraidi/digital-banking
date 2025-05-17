@@ -80,10 +80,33 @@
               <ng-icon hlm name="lucideTrash" size="sm" class="mx-2" />
               Delete
             </button>
-            <button hlmMenuItem class="bg-yellow-200" [routerLink]="['/customers', element.id]">
-              <ng-icon hlm name="lucidePencil" size="sm" class="mx-2"  />
+            <button hlmMenuItem class="bg-yellow-200" [routerLink]="['/customers', element.id, 'edit']">
+              <ng-icon hlm name="lucidePencil" size="sm" class="mx-2" />
               Edit
             </button>
+            <button hlmMenuItem [brnMenuTriggerFor]="accountsMenu">
+              <ng-icon hlm name="lucideEye" size="sm" class="mx-2" />
+              View Accounts
+            </button>
+            <ng-template #accountsMenu>
+              <hlm-menu>
+                <hlm-menu-label>Accounts</hlm-menu-label>
+                <hlm-menu-separator />
+                @if (element.bankAccounts?.length) {
+                  @for (account of element.bankAccounts; track account.id) {
+                    <button hlmMenuItem [routerLink]="['/customers', element.id, 'accounts', account.id]">
+                      <ng-icon hlm name="lucideEye" size="sm" class="mx-2" />
+                      {{ account.type }}
+                    </button>
+                  }
+                } @else {
+                  <button hlmMenuItem >
+                    <ng-icon hlm name="lucideEye" size="sm" class="mx-2" />
+                    No Accounts
+                  </button>
+                }
+              </hlm-menu>
+            </ng-template>
           </hlm-menu-group>
         </hlm-menu>
       </ng-template>
